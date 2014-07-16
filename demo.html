@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>langid.js demonstration</title>
+    <script src="langid-model-full.js"></script>
+    <script src="langid.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $("#typerArea").keyup(displayType);
+      
+        function displayType(){
+          var contents = $("#typerArea").val();
+          if (contents.length == 0) {
+            $("#rankTable").hide();
+          }
+          else{
+            var rank = langid.rank(contents);
+            for (var i=0;i<5;i++){
+              $("#lang"+i).html(rank[i]["lang"]);
+              $("#conf"+i).html(rank[i]["logprob"]);
+            }
+
+
+            $("#rankTable").show();
+          }
+        }
+
+        $("#manualSubmit").remove();
+        $("#rankTable").hide();
+      });
+    </script>
+  </head>
+  <body>
+    <form method=post>
+      <center><table>
+        <tr>
+          <td>
+            <textarea name="q" id="typerArea" cols=40 rows=6></textarea></br>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table id="rankTable">
+              <tr>
+                <td id="lang0">
+                  <p>Unable to load jQuery, live update disabled.</p>
+                </td><td id="conf0"/>
+              </tr>
+              <tr><td id="lang1"/><td id="conf1"></tr>
+              <tr><td id="lang2"/><td id="conf2"></tr>
+              <tr><td id="lang3"/><td id="conf3"></tr>
+              <tr><td id="lang4"/><td id="conf4"></tr>
+            </table>
+            <input type=submit id="manualSubmit" value="submit">
+          </td>
+        </tr>
+      </table></center>
+    </form>
+
+  </body>
+</html>

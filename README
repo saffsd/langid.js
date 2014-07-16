@@ -1,0 +1,24 @@
+Introduction
+------------
+`langid.js` is a direct port of the language identifier implemented by `langid.py`. 
+The theory behind the method is described in two published research papers 
+[1,2]. `langid.js` does not implement the training of the model, and instead
+provides a tool `ldpy2ldjs.py` to convert models trained with the langid.py training tools.
+
+Demonstration
+-------------
+Open `demo.html` in a browser. `langid.js` uses TypedArrays so a browser that supports
+them is required.
+
+Usage
+-----
+The models and the actual classifier are distributed as two separate javascript files, and both
+must be included in a page for the `langid.js` to work. In this repository, I initially provide
+`langid-model-acquis.js`, a toy 4-language model based on only JRC-Acquis data, useful for
+testing and development purposes, as well as `langid-model-full.js`, the same model that
+is packaged by default with `langid.py`.
+
+References
+----------
+[1] http://aclweb.org/anthology-new/I/I11/I11-1062.pdf
+[2] http://www.aclweb.org/anthology/P/P12/P12-3005.pdf
