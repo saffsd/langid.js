@@ -46,10 +46,16 @@ var langid = (function() {
 
   my.textToFv = function(str){
     // convert raw input text to a vector of transitions.
+
+    // The model in langid.js operates at a byte level, and most
+    // of the training data used was UTF8, so we need to first encode 
+    // the string in UTF8 before processing.
+    var enc = unescape(encodeURIComponent(str));
+
     var sv = new Uint32Array(num_states);
     var s = 0; // start at state 0;
-    for (var i=0, l=str.length; i<l; i++){
-      var c = str.charCodeAt(i);
+    for (var i=0, l=enc.length; i<l; i++){
+      var c = enc.charCodeAt(i);
       s = tk_nextmove[(s<<8)+c];
       sv[s] += 1;
     }
